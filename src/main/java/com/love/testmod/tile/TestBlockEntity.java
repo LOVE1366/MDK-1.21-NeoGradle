@@ -27,7 +27,7 @@ public class TestBlockEntity extends BlockEntity {
         return pos;
     }
 
-    public static Vec3 pos;
+    public static Vec3 pos = new Vec3(0, 0, 0);
 
     public TestBlockEntity(BlockPos pos, BlockState state) {
         super(TEST_BLOCK_ENTITY.get(), pos, state);
@@ -56,12 +56,12 @@ public class TestBlockEntity extends BlockEntity {
         double y = getBlockPos().getY() + 0.5D;
         double z = getBlockPos().getZ() + 0.5D;
         return new AABB(
-                x - 3.5D,
-                y - 3.5D,
-                z - 3.5D,
-                x + 3.5D,
-                y + 3.5D,
-                z + 3.5D
+                x - 6.5D,
+                y - 6.5D,
+                z - 6.5D,
+                x + 6.5D,
+                y + 6.5D,
+                z + 6.5D
         );
     }
 

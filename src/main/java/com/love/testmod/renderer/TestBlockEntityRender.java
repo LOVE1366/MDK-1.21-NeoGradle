@@ -2,6 +2,7 @@ package com.love.testmod.renderer;
 
 import com.love.testmod.tile.TestBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -35,12 +36,15 @@ public class TestBlockEntityRender implements BlockEntityRenderer<TestBlockEntit
         Vector3f targetPos = TestBlockEntity.getPos().toVector3f();
 
         Vector3f direction = new Vector3f(
-                (float) (targetPos.x - pos.getX()),
-                (float) (targetPos.y - pos.getY()),
-                (float) (targetPos.z - pos.getZ())
+                targetPos.x - pos.getX() - 0.5f,
+                targetPos.y - pos.getY() + 0.5f,
+                targetPos.z - pos.getZ() - 0.5f
         );
 
         Quaternionf rot = lookAt(direction, new Vector3f(0, 1, 0));
+        rot.mul(Axis.XP.rotation((float) (Math.PI / 4)));
+        rot.mul(Axis.YP.rotation((float) (Math.PI / 2)));
+        //rot.mul(Axis.ZP.rotation((float) (Math.PI / 4)));
 
         poseStack.pushPose();
 
