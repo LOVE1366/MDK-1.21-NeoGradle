@@ -9,9 +9,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,6 +28,7 @@ import org.joml.Vector3f;
 public class TestBlockEntityRender implements BlockEntityRenderer<TestBlockEntity> {
 
     private final ItemRenderer itemRenderer;
+
     public TestBlockEntityRender(BlockEntityRendererProvider.Context context) {
         this.itemRenderer = context.getItemRenderer();
     }
@@ -48,13 +51,15 @@ public class TestBlockEntityRender implements BlockEntityRenderer<TestBlockEntit
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
         int packedLight = LightTexture.pack(blockLight, skyLight);
 
+        ModelResourceLocation modelId = new ModelResourceLocation(ResourceLocation.parse("minecraft:bow_pulling_1"), "inventory");
+
         poseStack.pushPose();
 
         poseStack.translate(0.5d, 1.5d, 0.5d);
         poseStack.mulPose(rot);
         poseStack.scale(1, 1, 1);
 
-        itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, packedOverlay, getBowModel(0.65f));
+        itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, packedOverlay, Minecraft.getInstance().getModelManager().getModel(modelId));;
 
         poseStack.popPose();
     }
