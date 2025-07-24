@@ -16,13 +16,13 @@ import static com.love.testmod.TestMod.MODID;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-    public static final DeferredBlock<Block> registerBlock(String name, Supplier<Block> blockSupplier){
+    public static DeferredBlock<Block> registerBlock(String name, Supplier<Block> blockSupplier){
         return BLOCKS.register(name,blockSupplier);
     }
-    public static final DeferredItem<BlockItem> registerBlockItem(String name, Supplier<BlockItem> itemSupplier){
+    public static DeferredItem<BlockItem> registerBlockItem(String name, Supplier<BlockItem> itemSupplier){
         return ModItems.ITEMS.register(name,itemSupplier);
     }
 
-    public static final DeferredBlock<Block> TEST_BLOCK = registerBlock("test_block", ()-> new Block(BlockBehaviour.Properties.of()));
+    public static final DeferredBlock<Block> TEST_BLOCK = registerBlock("test_block", ()-> new TestBlock(BlockBehaviour.Properties.of()));
     public static final DeferredItem<BlockItem> TEST_BLOCK_ITEM = registerBlockItem("test_block", ()-> new BlockItem(TEST_BLOCK.get(), new Item.Properties()));
 }
